@@ -27,9 +27,13 @@ app.get("/" , (req,res)=>{
     res.send("backend is running ");
 });
 
-const PORT = process.env.PORT|| 4000;
+// Export the app for Vercel serverless
+export default app;
 
-app.listen(PORT , () => {
-    console.log(`server is runnig on ${PORT}`);
-
-});
+// Local dev server
+if (process.env.VERCEL !== '1') {
+  const PORT = process.env.PORT|| 4000;
+  app.listen(PORT , () => {
+    console.log(`server is running on ${PORT}`);
+  });
+}
