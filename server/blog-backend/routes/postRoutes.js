@@ -22,7 +22,16 @@ router.post("/", requireAuth, async (req, res) => {
 // get all posts
 router.get("/", async (req, res) => {
   try {
-    const posts = await Post.find().populate("author", "name email");
+     const posts = await Post.find()
+      .populate("author", "name email")
+      .populate("likes")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "author",
+          select: "name email"
+        }
+      });
     res.json(posts);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -32,7 +41,16 @@ router.get("/", async (req, res) => {
 // get single post
 router.get("/:id", async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id).populate("author", "name email");
+    const post = await Post.findById(req.params.id)
+      .populate("author", "name email")
+      .populate("likes")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "author",
+          select: "name email"
+        }
+      });
     if (!post) return res.status(404).json({ message: "Post not found" });
     res.json(post);
   } catch (error) {

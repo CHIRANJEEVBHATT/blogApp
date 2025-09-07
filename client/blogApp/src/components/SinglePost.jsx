@@ -3,6 +3,8 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext";
 import axios from "axios";
+import LikeButton from "./LikeButton";
+import CommentSection from "./CommentSection";
 
 const SinglePost = () => {
   const { id } = useParams();
@@ -38,7 +40,7 @@ const SinglePost = () => {
     setDeleting(true);
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:4000/posts/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/posts/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       navigate("/");
@@ -135,15 +137,30 @@ const SinglePost = () => {
             {post.content}
           </div>
 
-          <footer className="mt-12 pt-6 border-t border-gray-300">
-            <Link
-              to="/"
-              className={`${isDark ? 'text-gray-400' : 'text-amber-600'}`}
-            >
-              ← Back to posts
-            </Link>
-          </footer>
+          <div className="mt-8 pt-6 border-t border-gray-300">
+            <div className="flex items-center justify-between mb-6">
+              <LikeButton 
+                postId={post._id} 
+                initialLikes={post.likes || []}
+                onLikeUpdate={fetchPost}
+              />
+              <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-amber-600'}`}>
+                {post.comments?.length || 0} comments
+              </span>
+            </div>
+          </div>
         </article>
+
+        <CommentSection postId={post._id} />
+
+        <div className="mt-8">
+          <Link
+            to="/"
+            className={`${isDark ? 'text-gray-400' : 'text-amber-600'}`}
+          >
+            ← Back to posts
+          </Link>
+        </div>
       </div>
     </div>
   );

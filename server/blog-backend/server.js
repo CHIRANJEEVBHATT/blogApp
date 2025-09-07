@@ -4,6 +4,8 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import postRoutes from "./routes/postRoutes.js";
+import likeRoutes from "./routes/likeRoutes.js";
+import commentRoutes from "./routes/commentRoutes.js";
 
 
 dotenv.config();
@@ -15,7 +17,8 @@ app.use(express.json());
 
 // app.use(express.json());
 app.use(cors());
-
+app.use("/likes", likeRoutes);
+app.use("/comments", commentRoutes);
 
 
 app.use("/auth" , authRoutes);

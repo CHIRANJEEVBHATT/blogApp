@@ -54,7 +54,7 @@ const EditPost = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `http://localhost:4000/posts/${id}`,
+        `${import.meta.env.VITE_API_URL}/posts/${id}`,
         { title: title.trim(), content: content.trim() },
         { headers: { Authorization: `Bearer ${token}` } }
       );

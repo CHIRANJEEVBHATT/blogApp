@@ -21,7 +21,7 @@ const CreatePost = () => {
     const token = localStorage.getItem("token");
     try {
       const response = await axios.post(
-        "http://localhost:4000/posts",
+        `${import.meta.env.VITE_API_URL}/posts`,
         { title: title.trim(), content: content.trim() },
         { headers: { Authorization: `Bearer ${token}` } }
       );

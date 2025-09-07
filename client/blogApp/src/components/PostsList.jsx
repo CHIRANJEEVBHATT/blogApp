@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useTheme } from "../context/ThemeContext";
+import LikeButton from "./LikeButton";
 
 const PostsList = () => {
   const [posts, setPosts] = useState([]);
@@ -15,8 +16,7 @@ const PostsList = () => {
 
   const fetchPosts = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/posts/`);
-
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/posts`);
       setPosts(response.data);
       setLoading(false);
     } catch (err) {
@@ -98,12 +98,25 @@ const PostsList = () => {
             </p>
           </div>
           
-          <Link
-            to={`/post/${post._id}`}
-            className={`text-sm ${isDark ? 'text-cyan-400' : 'text-amber-600'}`}
-          >
-            Read more →
-          </Link>
+          <div className="flex items-center justify-between">
+            <Link
+              to={`/post/${post._id}`}
+              className={`text-sm ${isDark ? 'text-cyan-400' : 'text-amber-600'}`}
+            >
+              Read more →
+            </Link>
+            
+            <div className="flex items-center space-x-4">
+              <LikeButton 
+                postId={post._id} 
+                initialLikes={post.likes || []}
+                onLikeUpdate={fetchPosts}
+              />
+              <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-amber-600'}`}>
+                {post.comments?.length || 0} comments
+              </span>
+            </div>
+          </div>
         </article>
       ))}
     </div>
