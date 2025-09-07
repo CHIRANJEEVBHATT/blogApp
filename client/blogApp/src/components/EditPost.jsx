@@ -22,10 +22,11 @@ const EditPost = () => {
 
   const fetchPost = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/posts/${id}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${id}`);
+
       const postData = response.data;
       
-      // Check if user is the author
+      
       if (user && user._id !== postData.author._id) {
         setError("You are not authorized to edit this post");
         setLoading(false);
