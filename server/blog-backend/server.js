@@ -16,7 +16,17 @@ const app  = express();
 app.use(express.json());
 
 // app.use(express.json());
-app.use(cors());
+app.use(cors(
+  {
+    origin: [
+      'https://blog-app-sigma-gold.vercel.app',
+      'http://localhost:3000',
+      'http://localhost:5173'
+    ],
+    credentials: true
+  }
+
+));
 app.use("/likes", likeRoutes);
 app.use("/comments", commentRoutes);
 
