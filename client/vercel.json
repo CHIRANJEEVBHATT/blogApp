@@ -1,9 +1,9 @@
 {
-  "installCommand": "npm ci",
+  "installCommand": "npm ci --prefix blogApp",
   "buildCommand": "npm run build",
   "outputDirectory": "blogApp/dist",
   "framework": "vite",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
-}   
+}

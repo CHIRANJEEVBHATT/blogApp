@@ -1,4 +1,12 @@
 {
+  "name": "blogapp-client",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npm --prefix blogApp run build",
+    "install": "npm ci --prefix blogApp"
+  },
+    
   "dependencies": {
     "@tailwindcss/vite": "^4.1.13",
     "tailwindcss": "^4.1.13"
