@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route ,Link } from "react-router-dom";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import PostsList from "./components/PostsList";
@@ -51,8 +51,7 @@ const Home = () => {
             }`}>
               A simple place to share thoughts and stories. No fancy features, just writing.
             </p>
-            <a 
-              href="/login" 
+            <Link to="/login"
               className={`inline-block px-6 py-2 rounded-lg font-medium ${
                 isDark 
                   ? 'bg-cyan-600 text-white hover:bg-cyan-700'
@@ -60,7 +59,7 @@ const Home = () => {
               }`}
             >
               Get started
-            </a>
+            </Link>
           </div>
         )}
         
