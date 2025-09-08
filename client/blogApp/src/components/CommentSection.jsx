@@ -43,7 +43,7 @@ const CommentSection = ({ postId }) => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/${postId}`,
+        `${import.meta.env.VITE_API_URL}/comments/${postId}`,
         { content: newComment },
         { headers: { Authorization: `Bearer ${token}` } }
       );
