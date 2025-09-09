@@ -36,6 +36,15 @@ const Home = () => {
                 <p className={isDark ? 'text-gray-400' : 'text-amber-700'}>
                   What's on your mind today?
                 </p>
+                <Link to="/create-post" 
+                  className={`mt-4 inline-block px-6 py-2 rounded-lg font-medium text-center ${
+                  isDark 
+                  ? 'bg-gray-700 text-cyan-300 hover:bg-gray-600'
+                  : 'bg-amber-500 text-white hover:bg-amber-600'
+                   } transition-colors duration-300`}
+              >
+                  New Post
+                </Link>
               </div>
             </div>
           </div>
