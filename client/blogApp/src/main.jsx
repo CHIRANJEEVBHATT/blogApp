@@ -9,7 +9,7 @@ import { ThemeProvider } from "./context/ThemeContext.jsx";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-<GoogleOAuthProvider clientId="952358663674-ogm41h4co419bivuoq429gg44qpjrim0.apps.googleusercontent.com">
+<GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID} >
       <ThemeProvider>
         <AuthProvider>
           <App />
